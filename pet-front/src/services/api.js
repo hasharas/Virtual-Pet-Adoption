@@ -6,6 +6,19 @@ const API = axios.create({
       baseURL: "http://localhost:5000/pets",
 });
 
+export const getAllPets = async () => {
+      try {
+            const response = await API.get("/");
+            console.log("Pets fetched successfully:", response.data);
+            return response.data;
+      } catch (error) {
+            console.error("Error fetching pets:", error);
+            toast.error("Failed to fetch pets. Please try again.");
+            throw error;
+      }
+};
+
+
 export const addPet = async (petData) => {
       try {
             const response = await API.post("/", petData);

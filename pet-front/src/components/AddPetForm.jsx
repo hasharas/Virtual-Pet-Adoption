@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { addPet } from '../services/api';
 
-const AddPetForm = () => {
+const AddPetForm = ({ onPetAdded }) => {
 
 
       const [petData, setPetData] = useState({
@@ -25,6 +25,7 @@ const AddPetForm = () => {
             e.preventDefault();
             try {
                   await addPet(petData);
+                  onPetAdded(); // Call the function to update the pet list in the parent component
                   setPetData({
                         name: "",
                         age: "",
