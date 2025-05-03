@@ -49,9 +49,14 @@ export const deletePet = async (id) => {
       const pet = await Pet.findByIdAndDelete(id);
       if (!pet) throw new Error('Pet not found');
       return pet;
-}
+};
 
 
 export const filterPetByMood = async (mood) => {
+      const pets = await Pet.find();
+      if (!pets || pets.length === 0) throw new Error('No pets found');
+      return pets
+            .map(pet => ({ ...pet.toObject(), mood: getMood(pet.createdAt) }))
+            .filter(pet => pet.mood === mood);
 
-}
+};
