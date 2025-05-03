@@ -2,42 +2,37 @@ import Pet from '../models/petModel.js';
 import { getMood } from '../utils/moodLogic.js';
 
 export const createPet = async (data) => {
-      try {
-            const pet = new Pet(data);
-            await pet.save();
-            return pet;
-      } catch (error) {
-            throw new Error('Error creating pet: ' + error.message);
-      }
+
+      const pet = new Pet(data);
+      await pet.save();
+      if (!pet) throw new Error('Error creating pet');
+      return pet;
+
 };
 
 export const getAllPets = async () => {
-      try {
-            const pets = await Pet.find();
-            return pets.map(pet => ({ ...pet.toObject(), mood: getMood(pet.createdAt) }));
-      } catch (error) {
-            throw new Error('Error retrieving pets: ' + error.message);
-      }
+
+      const pets = await Pet.find();
+      if (!pets || pets.length === 0) throw new Error('No pets found');
+      return pets.map(pet => ({ ...pet.toObject(), mood: getMood(pet.createdAt) }));
+
 };
 
 
 export const getPetById = async (id) => {
-      try {
-            const pet = await Pet.findById(id);
-            return pet;
-      } catch (error) {
-            throw new Error('Error retrieving pet: ' + error.message);
-      }
+
+      const pet = await Pet.findById(id);
+      if (!pet) throw new Error('Pet not found');
+      return pet;
+
 }
 
 export const updatePet = async (id, data) => {
-      try {
-            const pet = await Pet.findByIdAndUpdate(id, data, { new: true });
-            return pet;
-      }
-      catch (error) {
-            throw new Error('Error updating pet: ' + error.message);
-      }
+
+      const pet = await Pet.findByIdAndUpdate(id, data, { new: true });
+      if (!pet) throw new Error('Pet not found');
+      return pet;
+
 }
 
 export const adoptPet = async (id) => {
