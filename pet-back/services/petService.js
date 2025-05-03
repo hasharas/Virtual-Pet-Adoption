@@ -12,6 +12,23 @@ export const createPet = async (data) => {
 };
 
 export const getAllPets = async () => {
-      const pets = await Pet.find();
-      return pets.map(pet => ({ ...pet.toObject(), mood: getMood(pet.createdAt) }));
+      try {
+            const pets = await Pet.find();
+            return pets.map(pet => ({ ...pet.toObject(), mood: getMood(pet.createdAt) }));
+      } catch (error) {
+            throw new Error('Error retrieving pets: ' + error.message);
+      }
 };
+
+
+export const getPetById = async (id) => {
+      try {
+            const pet = await Pet.findById(id);
+            if (!pet) throw new Error('Pet not found');
+            return pet;
+      } catch (error) {
+            throw new Error('Error retrieving pet: ' + error.message);
+      }
+}
+
+
