@@ -30,6 +30,11 @@ const petSchema = new mongoose.Schema({
       adoption_date: {
             type: Date,
             default: null,
+      },
+      createdAt:
+      {
+            type: Date,
+            default: Date.now
       }
 
 
