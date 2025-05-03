@@ -43,3 +43,15 @@ export const adoptPet = async (id) => {
       await pet.save();
       return pet;
 };
+
+
+export const deletePet = async (id) => {
+      const pet = await Pet.findByIdAndDelete(id);
+      if (!pet) throw new Error('Pet not found');
+      return pet;
+}
+
+
+export const filterPetByMood = async (mood) => {
+
+}
