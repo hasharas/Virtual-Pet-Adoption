@@ -3,8 +3,8 @@ import * as petService from '../services/petService.js';
 
 export const addPet = async (req, res) => {
       try {
-            const petData = req.body;
-            const newPet = await petService.createPet(petData);
+
+            const newPet = await petService.createPet(req.body);
             res.status(201).json({
                   status: 'success',
                   message: 'Pet added successfully',
