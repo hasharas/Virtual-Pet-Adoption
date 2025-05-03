@@ -24,11 +24,19 @@ export const getAllPets = async () => {
 export const getPetById = async (id) => {
       try {
             const pet = await Pet.findById(id);
-            if (!pet) throw new Error('Pet not found');
             return pet;
       } catch (error) {
             throw new Error('Error retrieving pet: ' + error.message);
       }
 }
 
+export const updatePet = async (id, data) => {
+      try {
+            const pet = await Pet.findByIdAndUpdate(id, data, { new: true });
+            return pet;
+      }
+      catch (error) {
+            throw new Error('Error updating pet: ' + error.message);
+      }
+}
 

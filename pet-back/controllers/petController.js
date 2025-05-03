@@ -42,3 +42,15 @@ export const getPetById = async (req, res) => {
       }
 }
 
+export const updatePet = async (req, res) => {
+      try {
+            const pet = await petService.updatePet(req.params.id, req.body);
+            res.json({
+                  status: 'success',
+                  message: 'Pet updated successfully',
+                  data: pet,
+            })
+      } catch (error) {
+            res.status(404).json({ message: 'Error updating pet', error: error.message });
+      }
+}
