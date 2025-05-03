@@ -54,3 +54,16 @@ export const updatePet = async (req, res) => {
             res.status(404).json({ message: 'Error updating pet', error: error.message });
       }
 }
+
+export const adoptPet = async (req, res) => {
+      try {
+            const pet = await petService.adoptPet(req.params.id);
+            res.status(200).json({
+                  status: 'success',
+                  message: 'Pet adopted successfully',
+                  data: pet,
+            });
+      } catch (error) {
+            res.status(404).json({ message: "Error adopting pet", error: error.message });
+      }
+}

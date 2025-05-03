@@ -40,3 +40,11 @@ export const updatePet = async (id, data) => {
       }
 }
 
+export const adoptPet = async (id) => {
+      const pet = await Pet.findById(id);
+      if (!pet) throw new Error('Pet not found');
+      pet.adopted = true;
+      pet.adoption_date = new Date();
+      await pet.save();
+      return pet;
+};
