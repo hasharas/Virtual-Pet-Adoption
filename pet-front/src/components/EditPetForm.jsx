@@ -1,6 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
-const EditPetForm = () => {
+const EditPetForm = ({ pet, onClose, onPetsChange }) => {
+
+      const [petData, setPetData] = useState({
+            name: pet.name,
+            age: pet.age,
+            species: pet.species,
+            personality: pet.personality,
+            mood: pet.mood,
+            adoption_date: pet.adoption_date
+      });
+
+
+      const handleInputChange = e => setPetData({ ...petData, [e.target.name]: e.target.value });
+
+      const handleSubmit = async e => {
+            e.preventDefault();
+            try {
+                  await updatePet(pet._id, petData);
+                  toast.success('Pet updated!');
+                  onPetsChange();
+                  onClose();
+            } catch {
+                  toast.error('Failed to update pet');
+            }
+      };
+
       return (
             <div className=" rounded-lg bg-slate-100 min-h-screen  mb-3 flex  justify-center sm:py-12">
                   <div className="max-w-lg w-full mx-5 p-8 mb-10 bg-white shadow-xl border border-blue-300 rounded-2xl mt-3 ">
@@ -85,8 +111,8 @@ const EditPetForm = () => {
                                           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 mb-5" />
                               </div>
                               <div className="flex justify-end gap-2 mt-2">
-                                    <button type="submit" className="bg-blue-500 font-popin w-full  hover:bg-blue-700 text-xl text-white font-bold py-4 px-4 rounded">
-                                          Save
+                                    <button type="submit" className="bg-red-500 font-popin w-full  hover:bg-red-700 text-xl text-white font-bold py-4 px-4 rounded">
+                                          Cancel
                                     </button>
 
                                     <button type="submit" className="bg-blue-500 font-popin w-full  hover:bg-blue-700 text-xl text-white font-bold py-4 px-4 rounded">

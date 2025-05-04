@@ -9,7 +9,7 @@ const AddPetForm = ({ onPetAdded }) => {
             age: "",
             species: "",
             personality: "",
-            mood: "",
+            mood: "happy",
             adoption_date: ""
       });
 
@@ -31,7 +31,7 @@ const AddPetForm = ({ onPetAdded }) => {
                         age: "",
                         species: "",
                         personality: "",
-                        mood: "",
+                        mood: "happy",
                         adoption_date: ""
                   });
                   console.log("Pet data submitted:", petData);
@@ -104,7 +104,8 @@ const AddPetForm = ({ onPetAdded }) => {
                                           id="mood"
                                           value={petData.mood}
                                           onChange={handleInputChange}
-                                          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    >
                                           <option value="">Select Mood</option>
                                           <option value="happy">Happy</option>
                                           <option value="sad">Sad</option>

@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { adoptPet, deletePet } from '../services/api';
 import { toast } from 'react-toastify';
+import { FaPaw, FaHeart, FaEdit, FaTrash } from 'react-icons/fa';
+import EditPetForm from './EditPetForm';
 
 const PetCard = ({ pet, onPetsChange }) => {
+      const [editOpen, setEditOpen] = useState(false);
 
       const handleAdopt = async () => {
             try {
@@ -16,6 +19,7 @@ const PetCard = ({ pet, onPetsChange }) => {
       const handleDelete = async () => {
             try {
                   await deletePet(pet._id);
+                  toast.success(`${pet.name} deleted`);
                   onPetsChange();
             } catch (error) {
                   toast.error('Failed to delete pet');
@@ -30,13 +34,49 @@ const PetCard = ({ pet, onPetsChange }) => {
                         <p className="text-gray-600 mb-1"> <span className="font-medium text-black">Age :</span> {pet.age}</p>
                         <p className="text-gray-600 mb-1"> <span className="font-medium">Species :</span> {pet.species}</p>
                         <p className="text-gray-600 mb-1"><span className="font-medium">Personality :</span> {pet.personality}</p>
-                        <p className="text-gray-600 mb-1"><span className="font-medium">Mood :</span> {pet.mood}</p>
+                        <p className="text-gray-600 mb-1">
+
+                              <span className="font-medium pr-3">Mood :</span>
+                              <span className={`px-1 py-1 align-middle items-center rounded text-white ${pet.mood === 'happy'
+                                    ? 'bg-green-500'
+                                    : pet.mood === 'sad'
+                                          ? 'bg-red-500'
+                                          : 'bg-yellow-500'
+                                    }`}> {pet.mood}</span>
+                        </p>
+
+                        <p className="text-gray-600 mb-1">
+                              <span className="font-medium">
+                                    Status : {pet.adopted ? 'Adopted' : 'Available'}
+                              </span>
+                        </p>
+
                         <p className="text-gray-600 mb-1"><span className="font-medium">Adoption Date :</span> {pet.adoption_date}</p>
                   </div>
-                  <div className="flex  justify-between mt-4 space-x-2">
-                        <button onClick={handleAdopt} className="flex justify-center w-20 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg transition-colors">Adopt</button>
-                        <button onClick={handleDelete} className="flex justify-center w-20 bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg transition-colors">Delete</button>
+                  <div className="flex  justify-between mt-4 gap-2 space-x-2">
+                        {!pet.adopted && (
+                              <button onClick={handleAdopt} className="flex justify-center items-center gap-2  w-24 bg-green-500 hover:bg-green-600 text-white font-popin  py-2 px-1 rounded-lg transition-colors">
+                                    <FaHeart /> Adopt
+                              </button>
+                        )}
+                        <button onClick={() => setEditOpen(true)} className="flex justify-center items-center gap-2 w-20 bg-gray-500 hover:bg-gray-600 text-white py-2 rounded-lg transition-colors">
+                              <FaEdit />   Edit
+                        </button>
+                        <button onClick={handleDelete} className="flex justify-center items-center gap-2 w-24 bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg transition-colors">
+                              <FaTrash />   Delete
+                        </button>
                   </div>
+
+                  {/* create a modal for edit pet form this allso can create like reuseble component */}
+
+                  {editOpen && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                              <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
+                                    <EditPetForm pet={pet} onClose={() => setEditOpen(false)} onPetsChange={onPetsChange} />
+                              </div>
+                        </div>
+                  )}
+
             </div>
       );
 }
