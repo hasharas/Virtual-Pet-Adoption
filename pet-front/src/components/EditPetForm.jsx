@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { updatePet } from '../services/api';
-import { formatDate } from '../utils/helpers';
 
 const EditPetForm = ({ pet, onClose, onPetsChange }) => {
 
+      // Check if the pet is already adopted
       const [petData, setPetData] = useState({
             name: pet.name,
             age: pet.age,
@@ -14,9 +14,10 @@ const EditPetForm = ({ pet, onClose, onPetsChange }) => {
             adoption_date: pet.adoption_date
       });
 
-
+      //handle input change
       const handleInputChange = e => setPetData({ ...petData, [e.target.name]: e.target.value });
 
+      //update pet data
       const handleSubmit = async e => {
             e.preventDefault();
             try {
@@ -31,9 +32,9 @@ const EditPetForm = ({ pet, onClose, onPetsChange }) => {
       };
 
       return (
-            <div className=" rounded-lg bg-slate-100   mb-3 flex  justify-center sm:py-12 ">
-                  <div className="max-w-lg w-full mx-5 p-8 mb-10 bg-white shadow-xl border border-blue-300 rounded-2xl mt-3 ">
-                        <h2 className='text-2xl font-popin font-semibold mb-6 text-center text-gray-700'>Add a New Pet</h2>
+            <div className=" rounded-lg bg-gradient-to-r from-white via-zinc-200 to-white   mb-3 flex  justify-center sm:py-12 ">
+                  <div className="max-w-lg w-full  p-8 mb-10 bg-white shadow-xl border border-blue-300 rounded-2xl mt-3 ">
+                        <h2 className='text-2xl font-popin font-semibold mb-6 text-center text-gray-700'>Add a New <span className='text-blue-500 text-3xl'>Pet</span> </h2>
                         <form action="" onSubmit={handleSubmit} className='space-y-4'>
                               <div>
                                     <label htmlFor="name" className='block text-gray-600 mb-1' >Pet Name</label>
@@ -98,16 +99,17 @@ const EditPetForm = ({ pet, onClose, onPetsChange }) => {
                                           <option value="">Select Mood</option>
                                           <option value="happy">Happy</option>
                                           <option value="sad">Sad</option>
+                                          <option value="excited">Excited</option>
 
                                     </select>
                               </div>
                               <div className=''>
                                     <label htmlFor="adoption_date" className='block text-gray-600 mb-1'>Adoption Date</label>
                                     <input
-                                          type="date"
+                                          type="number"
                                           id="adoption_date"
                                           name="adoption_date"
-                                          value={formatDate(petData.adoption_date)}
+                                          value={petData.adoption_date}
                                           onChange={handleInputChange}
                                           placeholder="Enter pet adoption date"
                                           required

@@ -1,13 +1,11 @@
-export const getMood = (createdAt) => {
+export const getMood = (adoption_date) => {
 
-      //mood function thare are 3 moods happy, neutral, sad
-
-      const day = (Date.now() - new Date(createdAt)) / (1000 * 60 * 60 * 24);
+      const day = (Date.now() - new Date(adoption_date)) / (1000 * 60 * 60 * 24);
 
       if (day < 1) {
             return 'happy';
       } else if (day < 3) {
-            return 'neutral';
+            return 'excited';
       } else {
             return 'sad';
       }

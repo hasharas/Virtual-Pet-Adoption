@@ -6,6 +6,7 @@ const API = axios.create({
       baseURL: "http://localhost:5000/pets",
 });
 
+//get all pets
 export const getAllPets = async () => {
       try {
             const response = await API.get("/");
@@ -18,6 +19,7 @@ export const getAllPets = async () => {
       }
 };
 
+//get pet by id
 export const getPetById = async (id) => {
       try {
             const response = await API.get(`/${id}`);
@@ -28,7 +30,7 @@ export const getPetById = async (id) => {
       }
 };
 
-
+//add a new pet
 export const addPet = async (petData) => {
       try {
             const response = await API.post("/", petData);
@@ -42,7 +44,7 @@ export const addPet = async (petData) => {
       }
 }
 
-
+//update pet by id
 export const updatePet = async (id, petData) => {
       try {
             const response = await API.put(`/${id}`, petData);
@@ -54,7 +56,7 @@ export const updatePet = async (id, petData) => {
       }
 };
 
-
+//adopt pet by id
 export const adoptPet = async (id) => {
       try {
             const response = await API.patch(`/${id}/adopt`);
@@ -66,7 +68,7 @@ export const adoptPet = async (id) => {
       }
 };
 
-
+//delete pet by id
 export const deletePet = async (id) => {
       try {
             await API.delete(`/${id}`);
@@ -77,6 +79,7 @@ export const deletePet = async (id) => {
       }
 };
 
+//filter pets by mood
 export const filterPets = async (mood) => {
       try {
             const response = await API.get(`/filter?mood=${mood}`);

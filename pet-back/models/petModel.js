@@ -19,14 +19,14 @@ const petSchema = new mongoose.Schema({
       },
       mood: {
             type: String,
-            required: true,
+            default: 'happy',
       },
       adopted: {
             type: Boolean,
-            default: false,
+            default: null,
       },
       adoption_date: {
-            type: Date,
+            type: Number,
             default: null,
       },
       createdAt:

@@ -3,16 +3,15 @@ import { addPet } from '../services/api';
 
 const AddPetForm = ({ onPetAdded }) => {
 
-
+      // State to manage pet data
       const [petData, setPetData] = useState({
             name: "",
             age: "",
             species: "",
             personality: "",
-            mood: "happy",
             adoption_date: ""
       });
-
+      // Function to handle input changes
       const handleInputChange = (e) => {
             const { name, value } = e.target;
             setPetData({
@@ -20,7 +19,7 @@ const AddPetForm = ({ onPetAdded }) => {
                   [name]: value
             });
       }
-
+      //add pet data to the database
       const handleSubmit = async (e) => {
             e.preventDefault();
             try {
@@ -31,7 +30,6 @@ const AddPetForm = ({ onPetAdded }) => {
                         age: "",
                         species: "",
                         personality: "",
-                        mood: "happy",
                         adoption_date: ""
                   });
                   console.log("Pet data submitted:", petData);
@@ -41,9 +39,10 @@ const AddPetForm = ({ onPetAdded }) => {
       };
 
       return (
-            <div className=" rounded-lg bg-slate-100 min-h-screen  mb-3 flex  justify-center sm:py-12">
-                  <div className="max-w-lg w-full mx-5 p-8 mb-10 bg-white shadow-xl border border-blue-300 rounded-2xl mt-3 ">
-                        <h2 className='text-2xl font-popin font-semibold mb-6 text-center text-gray-700'>Add a New Pet</h2>
+            <div className=" rounded-lg bg-gradient-to-r from-white via-zinc-200 to-white  mb-3 flex  justify-center sm:py-12">
+                  <div className="max-w-lg w-full mx-2 px-8 pt-8 pb-14 mb-10 bg-white  shadow-xl border border-blue-300 rounded-2xl mt-3 ">
+                        <h2 className='text-2xl font-popin font-semibold mb-6 text-center text-gray-700'>Add a New  <span className='text-blue-500 text-3xl'> Pet</span></h2>
+
                         <form action="" onSubmit={handleSubmit} className='space-y-4'>
                               <div>
                                     <label htmlFor="name" className='block text-gray-600 mb-1' >Pet Name</label>
@@ -97,7 +96,7 @@ const AddPetForm = ({ onPetAdded }) => {
                                           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                                     />
                               </div>
-                              <div>
+                              {/* <div>
                                     <label htmlFor="mood" className='block text-gray-600 mb-1'>Mood</label>
                                     <select
                                           name="mood"
@@ -111,11 +110,11 @@ const AddPetForm = ({ onPetAdded }) => {
                                           <option value="sad">Sad</option>
 
                                     </select>
-                              </div>
+                              </div> */}
                               <div className=''>
                                     <label htmlFor="adoption_date" className='block text-gray-600 mb-1'>Adoption Date</label>
                                     <input
-                                          type="date"
+                                          type="number"
                                           id="adoption_date"
                                           name="adoption_date"
                                           value={petData.adoption_date}
@@ -125,7 +124,7 @@ const AddPetForm = ({ onPetAdded }) => {
                                           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 mb-5" />
                               </div>
 
-                              <button type="submit" className="bg-blue-500 font-popin w-full  hover:bg-blue-700 text-xl text-white font-bold py-4 px-4 rounded">
+                              <button type="submit" className="bg-blue-500 font-popin w-full  hover:bg-blue-700 text-xl text-white font-bold py-4 px-4  rounded">
                                     Add Pet
                               </button>
                         </form>
