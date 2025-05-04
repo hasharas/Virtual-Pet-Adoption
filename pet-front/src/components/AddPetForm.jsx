@@ -39,8 +39,8 @@ const AddPetForm = ({ onPetAdded }) => {
       };
 
       return (
-            <div className=" rounded-lg bg-gradient-to-r from-white via-zinc-200 to-white  mb-3 flex  justify-center sm:py-12">
-                  <div className="max-w-lg w-full mx-2 px-8 pt-8 pb-14 mb-10 bg-white  shadow-xl border border-blue-300 rounded-2xl mt-3 ">
+            <div className=" rounded-3xl bg-gradient-to-r from-white via-zinc-200 to-white  mb-3 flex  justify-center sm:py-12">
+                  <div className="max-w-3xl w-full mx-2 px-8 pt-8 pb-14 mb-10 bg-white  shadow-xl border border-blue-300 rounded-3xl mt-3 ">
                         <h2 className='text-2xl font-popin font-semibold mb-6 text-center text-gray-700'>Add a New  <span className='text-blue-500 text-3xl'> Pet</span></h2>
 
                         <form action="" onSubmit={handleSubmit} className='space-y-4'>

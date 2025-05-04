@@ -7,7 +7,7 @@ import PetCard from './PetCard';
 // It takes pets and onPetsChange as props
 const PetList = ({ pets, onPetsChange }) => {
       return (
-            <div className="bg-gradient-to-r flex-col from-white via-zinc-200 to-white rounded-lg py-6 flex justify-center sm:py-12">
+            <div className="bg-gradient-to-r flex-col from-white via-zinc-200 to-white rounded-3xl py-6 flex justify-center sm:py-12">
                   <div>
                         <h2 className='text-3xl font-popin font-semibold mb-6 text-center text-gray-700'>Available <span className='text-blue-500 text-4xl'>Pets</span> </h2>
                   </div>

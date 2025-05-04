@@ -77,7 +77,7 @@ const PetCard = ({ pet, onPetsChange }) => {
 
                         {editOpen && (
                               <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-50">
-                                    <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-auto">
+                                    <div className="bg-white rounded-3xl shadow-lg  w-full max-w-2xl max-h-[900px] overflow-auto">
                                           <button
                                                 onClick={() => setEditOpen(false)}
                                                 className="absolute top-3 right-3 text-red-600 hover:text-red-800 text-2xl"
