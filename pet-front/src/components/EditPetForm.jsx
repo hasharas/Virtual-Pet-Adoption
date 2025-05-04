@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import { updatePet } from '../services/api';
+import { formatDate } from '../utils/helpers';
 
 const EditPetForm = ({ pet, onClose, onPetsChange }) => {
 
@@ -19,16 +21,17 @@ const EditPetForm = ({ pet, onClose, onPetsChange }) => {
             e.preventDefault();
             try {
                   await updatePet(pet._id, petData);
-                  toast.success('Pet updated!');
+                  console.log("Pet data submitted:", petData);
                   onPetsChange();
                   onClose();
-            } catch {
+            } catch (error) {
                   toast.error('Failed to update pet');
+                  console.log("Error updating pet:", error);
             }
       };
 
       return (
-            <div className=" rounded-lg bg-slate-100 min-h-screen  mb-3 flex  justify-center sm:py-12">
+            <div className=" rounded-lg bg-slate-100   mb-3 flex  justify-center sm:py-12 ">
                   <div className="max-w-lg w-full mx-5 p-8 mb-10 bg-white shadow-xl border border-blue-300 rounded-2xl mt-3 ">
                         <h2 className='text-2xl font-popin font-semibold mb-6 text-center text-gray-700'>Add a New Pet</h2>
                         <form action="" onSubmit={handleSubmit} className='space-y-4'>
@@ -104,14 +107,14 @@ const EditPetForm = ({ pet, onClose, onPetsChange }) => {
                                           type="date"
                                           id="adoption_date"
                                           name="adoption_date"
-                                          value={petData.adoption_date}
+                                          value={formatDate(petData.adoption_date)}
                                           onChange={handleInputChange}
                                           placeholder="Enter pet adoption date"
                                           required
                                           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 mb-5" />
                               </div>
                               <div className="flex justify-end gap-2 mt-2">
-                                    <button type="submit" className="bg-red-500 font-popin w-full  hover:bg-red-700 text-xl text-white font-bold py-4 px-4 rounded">
+                                    <button onClick={onClose} type="submit" className="bg-red-500 font-popin w-full  hover:bg-red-700 text-xl text-white font-bold py-4 px-4 rounded">
                                           Cancel
                                     </button>
 

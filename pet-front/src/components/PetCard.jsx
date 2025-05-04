@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { adoptPet, deletePet } from '../services/api';
 import { toast } from 'react-toastify';
-import { FaPaw, FaHeart, FaEdit, FaTrash } from 'react-icons/fa';
+import { FaHeart, FaEdit, FaTrash, FaTimes } from 'react-icons/fa';
 import EditPetForm from './EditPetForm';
+import { formatDate } from '../utils/helpers';
 
 const PetCard = ({ pet, onPetsChange }) => {
       const [editOpen, setEditOpen] = useState(false);
@@ -51,7 +52,7 @@ const PetCard = ({ pet, onPetsChange }) => {
                               </span>
                         </p>
 
-                        <p className="text-gray-600 mb-1"><span className="font-medium">Adoption Date :</span> {pet.adoption_date}</p>
+                        <p className="text-gray-600 mb-1"><span className="font-medium">Adoption Date :</span> {formatDate(pet.adoption_date)}</p>
                   </div>
                   <div className="flex  justify-between mt-4 gap-2 space-x-2">
                         {!pet.adopted && (
@@ -70,8 +71,14 @@ const PetCard = ({ pet, onPetsChange }) => {
                   {/* create a modal for edit pet form this allso can create like reuseble component */}
 
                   {editOpen && (
-                        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                              <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-50">
+                              <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md max-h-[90vh] overflow-auto">
+                                    <button
+                                          onClick={() => setEditOpen(false)}
+                                          className="absolute top-3 right-3 text-red-600 hover:text-red-800 text-2xl"
+                                    >
+                                          <FaTimes />
+                                    </button>
                                     <EditPetForm pet={pet} onClose={() => setEditOpen(false)} onPetsChange={onPetsChange} />
                               </div>
                         </div>
