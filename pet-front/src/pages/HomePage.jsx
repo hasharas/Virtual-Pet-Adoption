@@ -9,9 +9,8 @@ const HomePage = () => {
 
       const fetchPets = async () => {
             try {
-                  const data = await getAllPets();
-                  setPets(data);
-
+                  const response = await getAllPets();
+                  setPets(response.data);
             } catch (error) {
                   console.error("Error fetching pets:", error);
             }
@@ -22,9 +21,10 @@ const HomePage = () => {
       }, []);
 
       return (
-            <div className="container mx-auto p-4">
+            <div className="container   mx-auto p-4">
+                  <h1 className="text-3xl font-bold mb-4 font-popin p-4 bg-slate-100 rounded-lg text-center">Pet Adoption Center</h1>
                   <AddPetForm onPetAdded={fetchPets} />
-                  <PetList />
+                  <PetList pets={pets} onPetsChange={fetchPets} />
             </div>
       );
 }
