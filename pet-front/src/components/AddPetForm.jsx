@@ -25,7 +25,7 @@ const AddPetForm = ({ onPetAdded }) => {
             e.preventDefault();
             try {
                   await addPet(petData);
-                  onPetAdded(); // Call the function to update the pet list in the parent component
+                  onPetAdded(); // Call the function to update the pet list in the parent component // Refresh pet list after adding a new pet
                   setPetData({
                         name: "",
                         age: "",

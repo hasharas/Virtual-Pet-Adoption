@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AddPetForm from '../components/AddPetForm.jsx';
 import { getAllPets } from '../services/api.js';
+import PetList from '../components/PetList.jsx';
 
 const HomePage = () => {
 
@@ -23,6 +24,7 @@ const HomePage = () => {
       return (
             <div className="container mx-auto p-4">
                   <AddPetForm onPetAdded={fetchPets} />
+                  <PetList />
             </div>
       );
 }
