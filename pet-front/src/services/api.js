@@ -72,7 +72,7 @@ export const adoptPet = async (id) => {
 export const deletePet = async (id) => {
       try {
             await API.delete(`/${id}`);
-            toast.success('Pet deleted');
+            // toast.success('Pet deleted');
       } catch (error) {
             toast.error('Error deleting pet');
             throw error;
