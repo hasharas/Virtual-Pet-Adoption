@@ -18,6 +18,16 @@ export const getAllPets = async () => {
       }
 };
 
+export const getPetById = async (id) => {
+      try {
+            const response = await API.get(`/${id}`);
+            return response.data;
+      } catch (error) {
+            toast.error('Error fetching pet');
+            throw error;
+      }
+};
+
 
 export const addPet = async (petData) => {
       try {
@@ -31,3 +41,48 @@ export const addPet = async (petData) => {
             throw error;
       }
 }
+
+
+export const updatePet = async (id, petData) => {
+      try {
+            const response = await API.put(`/${id}`, petData);
+            toast.success('Pet updated successfully');
+            return response.data;
+      } catch (error) {
+            toast.error('Error updating pet');
+            throw error;
+      }
+};
+
+
+export const adoptPet = async (id) => {
+      try {
+            const response = await API.patch(`/${id}/adopt`);
+            toast.success('Pet adopted!');
+            return response.data;
+      } catch (error) {
+            toast.error('Error adopting pet');
+            throw error;
+      }
+};
+
+
+export const deletePet = async (id) => {
+      try {
+            await API.delete(`/${id}`);
+            toast.success('Pet deleted');
+      } catch (error) {
+            toast.error('Error deleting pet');
+            throw error;
+      }
+};
+
+export const filterPets = async (mood) => {
+      try {
+            const response = await API.get(`/filter?mood=${mood}`);
+            return response.data;
+      } catch (error) {
+            toast.error('Error filtering pets');
+            throw error;
+      }
+};
